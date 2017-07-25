@@ -1,0 +1,16 @@
+{
+  "name": "generator-huya-app",
+  "version": "1.0.0",
+  "description": "虎牙移动端脚手架",
+  "files": [
+    "generators"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "copy-dir": "^0.3.0",
+    "yeoman-generator": "^0.24.1",
+    "yosay": "^2.0.0"
+  }
+}
