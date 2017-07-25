@@ -6,7 +6,7 @@ __inline('./base/<%= lib %>.js');
 
 //indexdb 存储方案
 //__inline('./base/localforage.js');
-//__inline('./base/hy-localforage.js');
+//__inline('./base/hy_localforage.js');
 
 
 __inline('./base/mod.js');
