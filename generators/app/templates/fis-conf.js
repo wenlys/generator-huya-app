@@ -69,7 +69,7 @@ fis.hook('commonjs');
 
 
 //https://github.com/fex-team/fis3-preprocessor-js-require-css
-fis.match('*.js', {
+fis.match('*.{js,es6}', {
     preprocessor: [
         fis.plugin('js-require-file'),
         fis.plugin('js-require-css',{
