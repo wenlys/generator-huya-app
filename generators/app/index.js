@@ -39,17 +39,17 @@ module.exports = generators.Base.extend({
                 	{name: 'zepto', value: 'zepto'}
                 ],
                 store: true
-			}]).then((answers) => {
+			},{
+				type: 'confirm',
+				name: 'antiHijack',
+				message: '是否需要防挟持'
+		    }]).then((answers) => {
 
 				this.projectName = answers.projectName;
 				this.testSVN = answers.testSVN.replace(/\\/g,'/');
 				this.prodSVN = answers.prodSVN.replace(/\\/g,'/');
 				this.lib = answers.lib;
-
-				this.log(this.lib);
-
-
-
+				this.antiHijack = answers.antiHijack;
 			})
 	    }
 	},
@@ -58,7 +58,7 @@ module.exports = generators.Base.extend({
 			// 复制项目模板
             copydir.sync(this.templatePath(), this.destinationPath(), function(stat, filepath, filename){
                 // 文件不复制
-                if(filename === 'fis-conf.js' || filename === 'base.js'){
+                if(filename === 'fis-conf.js' || filename === 'base.js' || filename === 'index.html'){
                     return false;
                 }
                 return true;
@@ -81,6 +81,15 @@ module.exports = generators.Base.extend({
             	this.destinationPath('lib/base.js'),
                 {
                     lib: this.lib
+                }
+            );
+        },
+        views() {
+        	this.fs.copyTpl(
+            	this.templatePath('views/index.html'),
+            	this.destinationPath('views/index.html'),
+                {
+                    antiHijack: this.antiHijack
                 }
             );
         }

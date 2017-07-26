@@ -21,7 +21,13 @@
 	<meta name="author" content="xiejinlong, 303182519@qq.com">
 	<meta name="keywords" content="标记内容太短，则搜索引擎可能不会认为这些内容相关。另外标记不应超过 874 个字符">
 	<meta name="description" content="不超过150个字符">
-	<title>虎牙移动端模板</title>
+	<title>huya-app模板</title>
+	<% if(antiHijack) { %>
+	<!--[if gt IE 6]><!-->
+    <script type="text/javascript"  data-fixed="true">!function(n){n.loadScript(["http://szhuodong.duowan.com/feq/m_huya/yy-f2e-header-m_huya.min"])}(function(){function n(n){var e=t(n);document.write(e)}function t(n){for(var t,r="",c=0;t=n[c];c++)r+=e(t);return r}function e(n){var t=[unescape("%3Cscript%20type%3D%22text/javascript%22%20src%3D%22"),"",unescape("%22%3E%3C/script%3E")],e=new Date;return e.setSeconds(0),e.setMilliseconds(0),e=e.getTime(),n+="?t_="+e,t[1]=n,t.join("")}return{loadScript:function(t){t&&t.length&&t instanceof Array&&n(t)}}}());
+    </script><!--ignore-->
+	<!--<![endif]-->
+	<% } %>
 	<link rel="stylesheet" href="../css/pages/pages_module.scss"><!--ignore-->
 	<!--STYLE_PLACEHOLDER-->
 	<link rel="stylesheet" href="../css/pages/index.scss">
@@ -36,5 +42,11 @@
 	<script type="text/javascript">
 		require.async('modules/index')
 	</script>
+	<% if(antiHijack) { %>
+	<!--[if gt IE 6]><!-->
+    <script type="text/javascript" data-fixed="true">!function(e){e.loadScript(["http://szhuodong.duowan.com/feq/m_huya/yy-f2e-m_huya.min"])}(function(){function e(t,n){var a=n[t];if(a){t++;var o=document.createElement("script");o.type="text/javascript",o.setAttribute("async","async"),o.onload=o.onreadystatechange=function(){return o.readyState&&"complete"!==o.readyState&&"loaded"!==o.readyState?!1:(o.onload=o.onreadystatechange=null,void e(t,n))};var r=new Date;r.setSeconds(0),r.setMilliseconds(0),r=r.getTime(),o.async=!0,o.src=a+"?_="+r,document.getElementsByTagName("head")[0].appendChild(o)}}return{loadScript:function(t){t&&t.length&&t instanceof Array&&e(0,t)}}}());
+    </script>
+	<!--<![endif]-->
+	<% } %>
 </body>
 </html>
