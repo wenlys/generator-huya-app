@@ -11,6 +11,7 @@ fis.set('project.ignore', [
     'fis-dev.js',
     'fis-pub.js',
     'fis-conf.js',
+    'components/demo/**'
 ]);
 
 
