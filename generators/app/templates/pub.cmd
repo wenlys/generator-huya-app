@@ -1,1 +1,1 @@
-fis3 release prod & pause
+fis3 release prod -c & pause

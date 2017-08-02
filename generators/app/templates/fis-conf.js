@@ -173,7 +173,6 @@ fis.match('**', {
 fis.media('prod')
     //发布的时候，不使用编译缓存,全部MD5
     .match('**', { 
-        useCache: false,
         useHash: true
     })
     // http://fis.baidu.com/fis3/docs/api/config-glob.html
