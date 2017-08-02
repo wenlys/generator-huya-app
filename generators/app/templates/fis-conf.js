@@ -64,6 +64,9 @@ fis.match('/modules/**', {
     isMod: true,
 });
 
+fis.match('/widget/**/**.html', {
+    release : false
+},true);
 
 
 fis.hook('commonjs');
@@ -149,7 +152,7 @@ fis.match('!**.scss', {
 
 //过滤掉被打包的资源。
 fis.match('**', {
-    domain : '//test.hd.huya.com/<%= projectName %>',
+    domain : '//test.dwstatic.com/hd/<%= category %>/<%= projectName %>',
     deploy: [
         //https://github.com/fex-team/fis3-deploy-skip-packed
         fis.plugin('skip-packed',{
@@ -160,7 +163,7 @@ fis.match('**', {
             ]*/
         }),
         fis.plugin('local-deliver', {
-            to: '<%= testSVN %>/<%= projectName %>'
+            to: '<%= testSVN %>/<%= category %>/<%= projectName %>'
         })
     ]
 })
@@ -221,7 +224,7 @@ fis.media('prod')
 
 fis.media('prod')
     .match('**', {
-        domain : '//hd.huya.com/<%= projectName %>',
+        domain : '//a.msstatic.com/huya/hd/<%= category %>/<%= projectName %>',
         deploy: [
             //https://github.com/fex-team/fis3-deploy-skip-packed
             fis.plugin('skip-packed',{
@@ -232,7 +235,7 @@ fis.media('prod')
                 ]*/
             }),
             fis.plugin('local-deliver', {
-                to: '<%= prodSVN %>/<%= projectName %>'
+                to: '<%= prodSVN %>/<%= category %>/<%= projectName %>'
             })
         ]
     })
