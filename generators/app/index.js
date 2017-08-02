@@ -37,9 +37,17 @@ module.exports = generators.Base.extend({
                 choices: [
                 	{name: 'jquery', value: 'jquery'}, 
                 	{name: 'zepto', value: 'zepto'}
-                ],
-                store: true
-			},{
+                ]
+			}, {	
+                type: 'list',
+                name: 'category',
+                message: '您的项目属于哪个类别',
+                choices: [
+                	{name: 'web', value: 'web'}, 
+                	{name: 'h5', value: 'h5'},
+                	{name: 'pc', value: 'pc'}
+                ]
+			}, {
 				type: 'confirm',
 				name: 'antiHijack',
 				message: '是否需要防挟持'
@@ -49,6 +57,7 @@ module.exports = generators.Base.extend({
 				this.testSVN = answers.testSVN.replace(/\\/g,'/');
 				this.prodSVN = answers.prodSVN.replace(/\\/g,'/');
 				this.lib = answers.lib;
+				this.category = answers.category;
 				this.antiHijack = answers.antiHijack;
 			})
 	    }
@@ -71,7 +80,8 @@ module.exports = generators.Base.extend({
                 {
                     projectName: this.projectName,
                     testSVN: this.testSVN,
-                    prodSVN: this.prodSVN
+                    prodSVN: this.prodSVN,
+                    category: this.category
                 }
             );
         },
