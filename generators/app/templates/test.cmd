@@ -1,1 +1,1 @@
-fis3 release & pause
+npm run test & pause

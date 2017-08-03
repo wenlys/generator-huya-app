@@ -1,1 +1,1 @@
-fis3 release prod -c & pause
+npm run prod & pause
