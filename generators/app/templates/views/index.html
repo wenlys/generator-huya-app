@@ -6,12 +6,12 @@
 	<meta name="apple-mobile-web-app-capable" content="yes"><!-- 删除苹果默认的工具栏和菜单栏 -->
 	<meta name="apple-mobile-web-app-status-bar-style" content="black"><!-- 设置苹果工具栏颜色 -->
 	<meta name="format-detection" content="telphone=no, email=no"><!-- 忽略页面中的数字识别为电话，忽略email识别 -->
+	<meta name="msapplication-tap-highlight" content="no">
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta http-equiv="Pragma" content="no-cache">
 	<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
  	<meta http-equiv="Window-target" content="_top">
-	<meta name="msapplication-tap-highlight" content="no">
 	<meta name="keywords" content="标记内容太短，则搜索引擎可能不会认为这些内容相关。另外标记不应超过 874 个字符">
 	<meta name="description" content="不超过150个字符">
 	<title>huya-app模板</title>
@@ -33,7 +33,7 @@
 	<!--SCRIPT_PLACEHOLDER-->
 	<!--DEPENDENCIES_INJECT_PLACEHOLDER-->
 	<script type="text/javascript">
-		require.async('modules/index')
+		require('modules/index')
 	</script>
 	<% if(antiHijack) { %>
 	<!--[if gt IE 6]><!-->

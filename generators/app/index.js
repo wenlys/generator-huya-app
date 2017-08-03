@@ -67,7 +67,7 @@ module.exports = generators.Base.extend({
 			// 复制项目模板
             copydir.sync(this.templatePath(), this.destinationPath(), function(stat, filepath, filename){
                 // 文件不复制
-                if(filename === 'fis-conf.js' || filename === 'base.js' || filename === 'index.html'){
+                if(filename === 'fis-conf.js' || filename === 'base.js' || filename === 'index.html' || filename === 'package.json' || filename === 'release.js'){
                     return false;
                 }
                 return true;
@@ -100,6 +100,27 @@ module.exports = generators.Base.extend({
             	this.destinationPath('views/index.html'),
                 {
                     antiHijack: this.antiHijack
+                }
+            );
+        },
+        packages() {
+        	this.fs.copyTpl(
+            	this.templatePath('package.json'),
+            	this.destinationPath('package.json'),
+                {
+                    projectName: this.projectName
+                }
+            );
+        },
+        cmd() {
+        	this.fs.copyTpl(
+            	this.templatePath('cmd/release.js'),
+            	this.destinationPath('cmd/release.js'),
+                {
+                    projectName: this.projectName,
+                    testSVN: this.testSVN,
+                    prodSVN: this.prodSVN,
+                    category: this.category
                 }
             );
         }

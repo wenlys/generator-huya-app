@@ -11,7 +11,8 @@ fis.set('project.ignore', [
     'fis-dev.js',
     'fis-pub.js',
     'fis-conf.js',
-    'components/demo/**'
+    'components/demo/**',
+    'cmd/**'
 ]);
 
 
@@ -152,7 +153,8 @@ fis.match('!**.scss', {
 
 //过滤掉被打包的资源。
 fis.match('**', {
-    domain : '//test.dwstatic.com/hd/<%= category %>/<%= projectName %>',
+    //domain : '//test.dwstatic.com/hd/<%= category %>/<%= projectName %>',
+    domain: '//test.hd.huya.com/<%= category %>/<%= projectName %>',
     deploy: [
         //https://github.com/fex-team/fis3-deploy-skip-packed
         fis.plugin('skip-packed',{

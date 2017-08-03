@@ -1,0 +1,10 @@
+{
+	"name": "<%= projectName %>",
+	"version": "1.0.0",
+	"description": "<%= projectName %>",
+	"scripts": {
+		"test-w": "fis3 release -w",
+		"test": "node ./cmd/release.js",
+		"prod": "node ./cmd/release.js"
+	}
+}
