@@ -1,15 +1,12 @@
 // 项目过滤
 fis.set('project.ignore', [
-    'docs/**',
-    '.git/**',
-    '.svn/**',  
+    'docs/**', 
     'package.json', 
     '**.cmd', 
     '**.sh',
+    '**.log',
     '**/*.md',
     'components/**/*.json',
-    'fis-dev.js',
-    'fis-pub.js',
     'fis-conf.js',
     'components/demo/**',
     'cmd/**'

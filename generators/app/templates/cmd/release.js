@@ -18,7 +18,7 @@ if (TARGET === 'test') {
 	releaseCommand = testCommand;
 	path = '<%= testSVN %>/<%= category %>';
 	
-} else if (TARGET === 'pord') {
+} else if (TARGET === 'prod') {
 
 	releaseCommand = prodCommand;
 	path = '<%= prodSVN %>/<%= category %>';
