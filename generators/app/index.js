@@ -38,7 +38,12 @@ module.exports = generators.Base.extend({
                 	{name: 'jquery', value: 'jquery'}, 
                 	{name: 'zepto', value: 'zepto'}
                 ]
-			}, {	
+			}, {
+                type: 'confirm',
+                name: 'noCustomBase',
+                message: '不定制base.js（不定制走cdn）',
+                default : true
+            }, {	
                 type: 'list',
                 name: 'category',
                 message: '您的项目属于哪个类别',
@@ -59,6 +64,7 @@ module.exports = generators.Base.extend({
 				this.lib = answers.lib;
 				this.category = answers.category;
 				this.antiHijack = answers.antiHijack;
+                this.noCustomBase = answers.noCustomBase;
 			})
 	    }
 	},
@@ -99,7 +105,9 @@ module.exports = generators.Base.extend({
             	this.templatePath('views/index.html'),
             	this.destinationPath('views/index.html'),
                 {
-                    antiHijack: this.antiHijack
+                    antiHijack: this.antiHijack,
+                    noCustomBase: this.noCustomBase,
+                    lib: this.lib
                 }
             );
         },
