@@ -24,7 +24,7 @@ fis.match('*.{scss,sass}', {
     //标准化处理，加css前缀
     preprocessor: fis.plugin('autoprefixer', {
         // https://www.npmjs.com/package/fis3-preprocessor-autoprefixer
-        "browsers": ["Android >= 2.1", "iOS >= 4", "ie >= 8", "firefox >= 15"]
+        "browsers": ["Android >= 2.4", "iOS >= 4", "ie >= 8", "firefox >= 15"]
     })
 });
 // 对于有_的css就不要产出了，比如_xx.css,这种当做是内联的 

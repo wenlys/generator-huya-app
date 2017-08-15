@@ -1,1 +1,1 @@
-fis3 release -w
+fis3 release -wc
