@@ -4,7 +4,7 @@
 	"description": "<%= projectName %>",
 	"scripts": {
 		"test-w": "fis3 release -w",
-		"test": "node ./cmd/release.js",
-		"prod": "node ./cmd/release.js"
+		"test": "node ./command/release.js",
+		"prod": "node ./command/release.js"
 	}
 }
