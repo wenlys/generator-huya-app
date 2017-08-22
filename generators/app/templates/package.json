@@ -1,6 +1,10 @@
 {
 	"name": "<%= projectName %>",
 	"version": "1.0.0",
+	"category" : "<%= category %>",
+	"projectName" : "<%= projectName %>", 
+	"testSVN" : "<%= testSVN %>",
+	"prodSVN" : "<%= prodSVN %>",
 	"description": "<%= projectName %>",
 	"scripts": {
 		"test-w": "fis3 release -w",

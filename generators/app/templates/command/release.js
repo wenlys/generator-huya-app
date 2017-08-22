@@ -1,8 +1,9 @@
 const child_process = require('child_process');
 const fs = require('fs');
 const TARGET = process.env.npm_lifecycle_event;
+const oPackage = require('../package.json');
 
-const projectName = '<%= projectName %>';
+const projectName = oPackage.projectName;
 const testCommand = 'fis3 release -c';
 const prodCommand = 'fis3 release prod -c';
 
@@ -16,12 +17,12 @@ var currentPath = process.cwd();
 if (TARGET === 'test') {
 
 	releaseCommand = testCommand;
-	path = '<%= testSVN %>/<%= category %>';
+	path = oPackage.testSVN + '/'+ oPackage.category;
 	
 } else if (TARGET === 'prod') {
 
 	releaseCommand = prodCommand;
-	path = '<%= prodSVN %>/<%= category %>';
+	path = oPackage.prodSVN + '/' + oPackage.category;
 }
 
 

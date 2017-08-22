@@ -1,3 +1,6 @@
+var oPackage = require('./package.json');
+
+
 // 项目过滤
 fis.set('project.ignore', [
     'docs/**', 
@@ -151,7 +154,7 @@ fis.match('!**.scss', {
 //过滤掉被打包的资源。
 fis.match('**', {
     //domain : '//test.dwstatic.com/hd/<%= category %>/<%= projectName %>',
-    domain: '//test.hd.huya.com/<%= category %>/<%= projectName %>',
+    domain: '//test.hd.huya.com/' + oPackage.category + '/' + oPackage.projectName,
     deploy: [
         //https://github.com/fex-team/fis3-deploy-skip-packed
         fis.plugin('skip-packed',{
@@ -162,7 +165,7 @@ fis.match('**', {
             ]*/
         }),
         fis.plugin('local-deliver', {
-            to: '<%= testSVN %>/<%= category %>/<%= projectName %>'
+            to: oPackage.testSVN + '/' + oPackage.category + '/'  + oPackage.projectName
         })
     ]
 })
@@ -222,7 +225,7 @@ fis.media('prod')
 
 fis.media('prod')
     .match('**', {
-        domain : '//a.msstatic.com/huya/hd/<%= category %>/<%= projectName %>',
+        domain : '//a.msstatic.com/huya/hd/' + oPackage.category + '/' + oPackage.projectName,
         deploy: [
             //https://github.com/fex-team/fis3-deploy-skip-packed
             fis.plugin('skip-packed',{
@@ -233,7 +236,7 @@ fis.media('prod')
                 ]*/
             }),
             fis.plugin('local-deliver', {
-                to: '<%= prodSVN %>/<%= category %>/<%= projectName %>'
+                to: oPackage.prodSVN + '/' + oPackage.category + '/' + oPackage.projectName
             })
         ]
     })
