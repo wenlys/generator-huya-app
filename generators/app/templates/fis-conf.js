@@ -196,12 +196,8 @@ fis.media('prod')
             type : 'pngquant' //default is pngcrush
         })
     })
-    //压缩scss    
-    .match('**.scss', {
-        optimizer: fis.plugin('clean-css')
-    })
     //压缩css    
-    .match('**.css', {
+    .match('**.{css,scss}', {
         optimizer: fis.plugin('clean-css')
     })
     //压缩js
