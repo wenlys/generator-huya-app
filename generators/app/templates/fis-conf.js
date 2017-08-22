@@ -27,7 +27,7 @@ fis.match('*.{scss,sass}', {
         "browsers": ["Android >= 2.4", "iOS >= 4", "ie >= 8", "firefox >= 15"]
     })
 });
-// 对于有_的css就不要产出了，比如_xx.css,这种当做是内联的 
+// 对于有__的css就不要产出了，比如__xx.css,这种当做是内联的 
 fis.match(/(__(.*)\.(css|less|scss|sass))/i, {
     release : false
 });
