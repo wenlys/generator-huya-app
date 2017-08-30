@@ -62,6 +62,7 @@ fis.match('/components/**', {
     isMod: true
 });
 fis.match('/modules/**', {
+    useSameNameRequire: true,
     isMod: true,
 });
 
@@ -86,13 +87,14 @@ fis.match('*.{js,es6}', {
 
 fis.set('project.fileType.text', 'es6');
 fis.match('**.es6', {
+    isMod: true,
     parser: fis.plugin('babel-6.x', {
         // presets: [
         // 注意一旦这里在这里添加了 presets 配置，则会覆盖默认加载的 preset-2015 等插件，因此需要自行添加所有需要使用的 presets
         // ]
     }),
     rExt: 'js'
-});
+},true);
 
 
 //启用打包插件，必须匹配 ::package
