@@ -38,7 +38,17 @@ module.exports = generators.Base.extend({
                 	{name: 'jquery', value: 'jquery'}, 
                 	{name: 'zepto', value: 'zepto'}
                 ]
-			}, {
+			}, {   
+                type: 'list',
+                name: 'layout',
+                message: '适配布局选项',
+                choices: [
+                    {name: '不需要', value: 'no'}, 
+                    {name: '淘宝flexible布局', value: 'flexible'},
+                    {name: 'vw结合rem布局', value: 'vmRem'}
+                ],
+                default: 'no'
+            }, {
                 type: 'confirm',
                 name: 'noCustomBase',
                 message: '不定制base.js（不定制走cdn）',
@@ -62,6 +72,7 @@ module.exports = generators.Base.extend({
 				this.testSVN = answers.testSVN.replace(/\\/g,'/');
 				this.prodSVN = answers.prodSVN.replace(/\\/g,'/');
 				this.lib = answers.lib;
+                this.layout = answers.layout;
 				this.category = answers.category;
 				this.antiHijack = answers.antiHijack;
                 this.noCustomBase = answers.noCustomBase;
@@ -73,7 +84,7 @@ module.exports = generators.Base.extend({
 			// 复制项目模板
             copydir.sync(this.templatePath(), this.destinationPath(), function(stat, filepath, filename){
                 // 文件不复制
-                if(filename === 'base.js' || filename === 'index.html' || filename === 'package.json'){
+                if(filename === 'base.js' || filename === 'index.html' || filename === 'package.json' || filename === 'pages_module.scss'){
                     return false;
                 }
                 return true;
@@ -95,7 +106,8 @@ module.exports = generators.Base.extend({
                 {
                     antiHijack: this.antiHijack,
                     noCustomBase: this.noCustomBase,
-                    lib: this.lib
+                    lib: this.lib,
+                    layout: this.layout
                 }
             );
         },
@@ -108,6 +120,15 @@ module.exports = generators.Base.extend({
                     category: this.category,
                     testSVN: this.testSVN,
                     prodSVN: this.prodSVN,
+                }
+            );
+        },
+        pagesModule() {
+            this.fs.copyTpl(
+                this.templatePath('css/pages/pages_module.scss'),
+                this.destinationPath('css/pages/pages_module.scss'),
+                {
+                    layout: this.layout
                 }
             );
         }

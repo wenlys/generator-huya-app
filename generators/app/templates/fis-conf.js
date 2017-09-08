@@ -140,7 +140,7 @@ fis.match('views/(**)', {
 // 测试正式线上的可以用这个
 /*fis.set('new date', Date.now())
 
-fis.match('*.{{js,css,scss,png,jpg}}', {
+fis.match('*.{js,css,scss,png,jpg}', {
   query: '?=t' + fis.get('new date')
 });*/
 
@@ -155,7 +155,7 @@ fis.match('!**.scss', {
 
 //过滤掉被打包的资源。
 fis.match('**', {
-    //domain : '//test.dwstatic.com/hd/<%= category %>/<%= projectName %>',
+    //domain : '//test.hd.huya.com/<%= category %>/<%= projectName %>',
     domain: '//test.hd.huya.com/' + oPackage.category + '/' + oPackage.projectName,
     deploy: [
         //https://github.com/fex-team/fis3-deploy-skip-packed

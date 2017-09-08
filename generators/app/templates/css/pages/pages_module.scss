@@ -2,3 +2,24 @@
 
 @import "../modules/usually.scss";
 
+<% if (layout == 'vmRem') {%>
+html {
+	// 这里的10vw主要是将页面分成了10分计算
+	// $vm_fontsize: 75
+    // $vm_design: 750; 
+    // font-size: ($vm_fontsize / $vm_design) * 100vw;
+    font-size: 10vw; 
+    // 同时，通过Media Queries 限制根元素最大最小值
+    @media screen and (max-width: 320px) {
+        font-size: 64px;
+    }
+    @media screen and (min-width: 540px) {
+        font-size: 108px;
+    }
+}
+// body 也增加最大最小宽度限制，避免默认100%宽度的 block 元素跟随 body 而过大过小
+body {
+    max-width: 540px;
+    min-width: 320px;
+}
+<% } %>
