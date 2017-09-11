@@ -137,13 +137,8 @@ fis.match('views/(**)', {
 },true)
 
 
-// 测试正式线上的可以用这个
-/*fis.set('new date', Date.now())
 
-fis.match('*.{js,css,scss,png,jpg}', {
-  query: '?=t' + fis.get('new date')
-});*/
-
+fis.set('new date', Date.now())
 
 
 fis.match('!**.scss', {
@@ -154,23 +149,28 @@ fis.match('!**.scss', {
 
 
 //过滤掉被打包的资源。
-fis.match('**', {
-    //domain : '//test.hd.huya.com/<%= category %>/<%= projectName %>',
-    domain: '//test.hd.huya.com/' + oPackage.category + '/' + oPackage.projectName,
-    deploy: [
-        //https://github.com/fex-team/fis3-deploy-skip-packed
-        fis.plugin('skip-packed',{
-            // 默认被打包了 js 和 css 以及被 css sprite 合并了的图片都会在这过滤掉，
-            // 但是如果这些文件满足下面的规则，则依然不过滤
-            /*ignore: [
-                '/img/b1.png'
-            ]*/
-        }),
-        fis.plugin('local-deliver', {
-            to: oPackage.testSVN + '/' + oPackage.category + '/'  + oPackage.projectName
-        })
-    ]
-})
+fis.media('dev')
+    //测试正式线上的可以用这个
+    /*.match('*.{js,css,scss,png,jpg}', {
+      query: '?=t' + fis.get('new date')
+    })*/
+    .match('**', {
+        //domain : '//test.hd.huya.com/<%= category %>/<%= projectName %>',
+        domain: '//test.hd.huya.com/' + oPackage.category + '/' + oPackage.projectName,
+        deploy: [
+            //https://github.com/fex-team/fis3-deploy-skip-packed
+            fis.plugin('skip-packed',{
+                // 默认被打包了 js 和 css 以及被 css sprite 合并了的图片都会在这过滤掉，
+                // 但是如果这些文件满足下面的规则，则依然不过滤
+                /*ignore: [
+                    '/img/b1.png'
+                ]*/
+            }),
+            fis.plugin('local-deliver', {
+                to: oPackage.testSVN + '/' + oPackage.category + '/'  + oPackage.projectName
+            })
+        ]
+    })
 
 
 //发布配置

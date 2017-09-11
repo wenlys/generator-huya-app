@@ -7,7 +7,7 @@
 	"prodSVN" : "<%= prodSVN %>",
 	"description": "<%= projectName %>",
 	"scripts": {
-		"test-w": "fis3 release -w",
+		"test-w": "fis3 release -wc",
 		"test": "node ./command/release.js",
 		"prod": "node ./command/release.js"
 	}
