@@ -5,7 +5,7 @@ const copydir = require('copy-dir');
 
 module.exports = generators.Base.extend({
 	initializing: function () {
-		let folderName = path.basename(this.destinationRoot());
+		var folderName = path.basename(this.destinationRoot());
 		this.projectName = folderName || "huya_app";
 	 },
 	prompting : {
