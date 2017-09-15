@@ -29,6 +29,8 @@ module.exports = generators.Base.extend({
 
         	var viewConfig = this.config.get('viewConfig');
 
+        	viewConfig.viewName = this.viewName;
+
         	this.fs.copyTpl(
             	this.templatePath('./view.html'),
             	this.destinationPath('views/' + this.viewName + '.html'),
@@ -38,6 +40,11 @@ module.exports = generators.Base.extend({
         	this.fs.copyTpl(
             	this.templatePath('./view.scss'),
             	this.destinationPath('css/pages/' + this.viewName + '.scss')
+            );
+
+            this.fs.copyTpl(
+            	this.templatePath('./view.js'),
+            	this.destinationPath('modules/' + this.viewName + '/' + this.viewName + '.js')
             );
 
         }
