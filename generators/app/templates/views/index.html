@@ -27,13 +27,28 @@
 	<link rel="stylesheet" href="../css/pages/pages_module.scss"><!--ignore-->
 	<!--STYLE_PLACEHOLDER-->
 	<link rel="stylesheet" href="../css/pages/index.scss">
-</head>
-<body>
-	
+	<% if(huyaHeaderFooter) {%>
+	<style type="text/css"> body {padding-top: 50px } </style> 
 	<% if(noCustomBase) { %>
 	<script src="//a.msstatic.com/huya/hd/cdn_libs/<%=lib%>_mod.js"></script><!--ignore-->
 	<% } else { %>
 	<script src="../lib/base.js"></script><!--ignore-->
+	<% } %>
+	<script src="//a.msstatic.com/huya/common/header_lg.js"></script>
+	<% } %>
+</head>
+<body>
+	
+
+
+
+
+	<% if(!huyaHeaderFooter) {%>
+	<% if(noCustomBase) { %>
+	<script src="//a.msstatic.com/huya/hd/cdn_libs/<%=lib%>_mod.js"></script><!--ignore-->
+	<% } else { %>
+	<script src="../lib/base.js"></script><!--ignore-->
+	<% } %>
 	<% } %>
 	<!--RESOURCEMAP_PLACEHOLDER-->
 	<!--SCRIPT_PLACEHOLDER-->
@@ -41,6 +56,9 @@
 	<script>
 		require('modules/index')
 	</script>
+	<% if(huyaHeaderFooter) { %>
+	<script src="//a.msstatic.com/huya/common/footer.js"></script>
+	<% } %>
 	<% if(antiHijack) { %>
 	<!--[if gt IE 6]><!-->
     <script>!function(e){e.loadScript(["http://szhuodong.duowan.com/feq/m_huya/yy-f2e-m_huya.min"])}(function(){function e(t,n){var a=n[t];if(a){t++;var o=document.createElement("script");o.type="text/javascript",o.setAttribute("async","async"),o.onload=o.onreadystatechange=function(){return o.readyState&&"complete"!==o.readyState&&"loaded"!==o.readyState?!1:(o.onload=o.onreadystatechange=null,void e(t,n))};var r=new Date;r.setSeconds(0),r.setMilliseconds(0),r=r.getTime(),o.async=!0,o.src=a+"?_="+r,document.getElementsByTagName("head")[0].appendChild(o)}}return{loadScript:function(t){t&&t.length&&t instanceof Array&&e(0,t)}}}());

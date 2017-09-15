@@ -50,6 +50,11 @@ module.exports = generators.Base.extend({
                 default: 'no'
             }, {
                 type: 'confirm',
+                name: 'huyaHeaderFooter',
+                message: '需要虎牙公共头和脚',
+                default : true
+            }, {
+                type: 'confirm',
                 name: 'noCustomBase',
                 message: '不定制base.js（不定制走cdn）',
                 default : true
@@ -76,6 +81,7 @@ module.exports = generators.Base.extend({
 				this.category = answers.category;
 				this.antiHijack = answers.antiHijack;
                 this.noCustomBase = answers.noCustomBase;
+                this.huyaHeaderFooter = answers.huyaHeaderFooter;
 			})
 	    }
 	},
@@ -107,7 +113,8 @@ module.exports = generators.Base.extend({
                     antiHijack: this.antiHijack,
                     noCustomBase: this.noCustomBase,
                     lib: this.lib,
-                    layout: this.layout
+                    layout: this.layout,
+                    huyaHeaderFooter: this.huyaHeaderFooter
                 }
             );
         },
