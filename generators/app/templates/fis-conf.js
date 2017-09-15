@@ -12,7 +12,8 @@ fis.set('project.ignore', [
     'components/**/*.json',
     'fis-conf.js',
     'components/demo/**',
-    'command/**'
+    'command/**',
+    '.yo-rc.json'
 ]);
 
 

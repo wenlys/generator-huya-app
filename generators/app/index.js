@@ -86,6 +86,7 @@ module.exports = generators.Base.extend({
 	    }
 	},
 	writing : {
+
 		templates() {
 			// 复制项目模板
             copydir.sync(this.templatePath(), this.destinationPath(), function(stat, filepath, filename){
@@ -106,6 +107,16 @@ module.exports = generators.Base.extend({
             );
         },
         views() {
+
+            // 保存页面的配置
+            this.config.set('viewConfig', {
+                antiHijack: this.antiHijack,
+                noCustomBase: this.noCustomBase,
+                lib: this.lib,
+                layout: this.layout,
+                huyaHeaderFooter: this.huyaHeaderFooter
+            });
+            
         	this.fs.copyTpl(
             	this.templatePath('views/index.html'),
             	this.destinationPath('views/index.html'),
