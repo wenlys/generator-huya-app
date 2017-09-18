@@ -26,7 +26,7 @@
 	<% } %>
 	<link rel="stylesheet" href="../css/pages/pages_module.scss"><!--ignore-->
 	<!--STYLE_PLACEHOLDER-->
-	<link rel="stylesheet" href="../css/pages/index.scss">
+	<link rel="stylesheet" href="../css/pages/<%=viewName%>.scss">
 	<% if(huyaHeaderFooter) {%>
 	<style type="text/css"> body {padding-top: 50px } </style> 
 	<% if(noCustomBase) { %>
@@ -50,11 +50,12 @@
 	<script src="../lib/base.js"></script><!--ignore-->
 	<% } %>
 	<% } %>
+	<script src="//a.msstatic.com/huya/hd/cdn_libs/huyaerr_hdmonitor-v1.0.0.js" id="huyahiido_err_monitor" act="webhuyahderror" pageview="<%=projectName + '-' + viewName%>"></script><!--ignore-->
 	<!--RESOURCEMAP_PLACEHOLDER-->
 	<!--SCRIPT_PLACEHOLDER-->
 	<!--DEPENDENCIES_INJECT_PLACEHOLDER-->
 	<script>
-		require('modules/index')
+		require('modules/<%=viewName%>')
 	</script>
 	<% if(huyaHeaderFooter) { %>
 	<script src="//a.msstatic.com/huya/common/footer.js"></script>

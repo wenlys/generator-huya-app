@@ -149,12 +149,8 @@ fis.match('!**.scss', {
 });
 
 
-//过滤掉被打包的资源。
+// 测试发布配置
 fis.media('dev')
-    //测试正式线上的可以用这个
-    /*.match('*.{js,css,scss,png,jpg}', {
-      query: '?=t' + fis.get('new date')
-    })*/
     .match('**', {
         //domain : '//test.hd.huya.com/<%= category %>/<%= projectName %>',
         domain: '//test.hd.huya.com/' + oPackage.category + '/' + oPackage.projectName,
@@ -172,13 +168,56 @@ fis.media('dev')
             })
         ]
     })
+    //测试正式线上的可以用这个
+    .match('*.{js,css,scss,png,jpg}', {
+        query: '?t=' + fis.get('new date')
+    })
 
 
-//发布配置
+// 生成sourceMap配置
+fis.media('map')
+    .match('**', {
+        deploy: [
+            //https://github.com/fex-team/fis3-deploy-skip-packed
+            fis.plugin('skip-packed'),
+            fis.plugin('local-deliver', {
+                to: '../map'
+            })
+        ]
+    })
+    //压缩js
+    .match('**.js', {
+        optimizer: fis.plugin('uglify-js', {
+            mangle: {
+                expect: ['exports, module, require, define'] //不想被压的
+            },
+            //自动去除console.log等调试信息
+            compress : {
+                //drop_console: true
+            },
+            sourceMap: true
+        })
+    })
+
+
+// 正式发布配置
 fis.media('prod')
-    //发布的时候，不使用编译缓存,全部MD5
     .match('**', { 
-        useHash: true
+        useHash: true,  // 文件md5
+        domain : '//a.msstatic.com/huya/hd/' + oPackage.category + '/' + oPackage.projectName,
+        deploy: [
+            //https://github.com/fex-team/fis3-deploy-skip-packed
+            fis.plugin('skip-packed',{
+                // 默认被打包了 js 和 css 以及被 css sprite 合并了的图片都会在这过滤掉，
+                // 但是如果这些文件满足下面的规则，则依然不过滤
+                /*ignore: [
+                    '/img/b1.png'
+                ]*/
+            }),
+            fis.plugin('local-deliver', {
+                to: oPackage.prodSVN + '/' + oPackage.category + '/' + oPackage.projectName
+            })
+        ]
     })
     // http://fis.baidu.com/fis3/docs/api/config-glob.html
     .match('*.html:js', {
@@ -219,23 +258,4 @@ fis.media('prod')
         parser: fis.plugin('jdists', {
             remove: "debug"
         })
-    })
-
-
-fis.media('prod')
-    .match('**', {
-        domain : '//a.msstatic.com/huya/hd/' + oPackage.category + '/' + oPackage.projectName,
-        deploy: [
-            //https://github.com/fex-team/fis3-deploy-skip-packed
-            fis.plugin('skip-packed',{
-                // 默认被打包了 js 和 css 以及被 css sprite 合并了的图片都会在这过滤掉，
-                // 但是如果这些文件满足下面的规则，则依然不过滤
-                /*ignore: [
-                    '/img/b1.png'
-                ]*/
-            }),
-            fis.plugin('local-deliver', {
-                to: oPackage.prodSVN + '/' + oPackage.category + '/' + oPackage.projectName
-            })
-        ]
     })

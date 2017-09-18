@@ -110,6 +110,7 @@ module.exports = generators.Base.extend({
 
             // 保存页面的配置
             this.config.set('viewConfig', {
+                projectName: this.projectName,
                 antiHijack: this.antiHijack,
                 noCustomBase: this.noCustomBase,
                 lib: this.lib,
@@ -121,11 +122,13 @@ module.exports = generators.Base.extend({
             	this.templatePath('views/index.html'),
             	this.destinationPath('views/index.html'),
                 {
+                    projectName: this.projectName,
                     antiHijack: this.antiHijack,
                     noCustomBase: this.noCustomBase,
                     lib: this.lib,
                     layout: this.layout,
-                    huyaHeaderFooter: this.huyaHeaderFooter
+                    huyaHeaderFooter: this.huyaHeaderFooter,
+                    viewName: 'index'
                 }
             );
         },
