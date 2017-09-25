@@ -129,7 +129,9 @@ fis.match('::package', {
     })
 })
 
-
+fis.match('/lib/base/**', {
+    release: false
+});
 
 //view 的文件发布到根目录下
 fis.match('views/(**)', {
