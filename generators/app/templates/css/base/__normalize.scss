@@ -172,10 +172,6 @@ body {
 a {
     text-decoration: none;
     color: nth($base-link-color,1);
-    &:hover,&:focus {
-        text-decoration: underline;
-        color: nth($base-link-color,2);
-    }
 }
 
 /* ==========================================================================
