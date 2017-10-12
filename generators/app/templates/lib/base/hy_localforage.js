@@ -2,7 +2,7 @@
 * @Author: xiejinlong
 * @Date:   2016-12-15 10:30:44
 * @Last Modified by:   xiejinlong
-* @Last Modified time: 2016-12-15 16:48:03
+* @Last Modified time: 2017-10-12 10:19:04
 */
 
 (function(win){
@@ -122,7 +122,7 @@
 			    //容量超出了
 			    if (e.name == 'QuotaExceededError') {
 			    	//清空
-                    storage.clear().then(function() {
+                    store.clear().then(function() {
                     	//再写入一次
                     	store.setItem(name, v);
 
