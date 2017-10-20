@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 var oPackage = require('./package.json');
 
 
@@ -67,10 +69,16 @@ fis.match('/modules/**', {
     isMod: true,
 });
 
-fis.match('/widget/**/**.html', {
+fis.match('{/widget/**/**.html, /widget/**/**.scss}', {
     release : false
 },true);
 
+
+// 假如想某些widget的scss资源发布的话，请开启这里
+/*fis.match('{/widget/header/header.scss,/widget/sidebar/sidebar.scss}', {
+    release : true
+},true);
+*/
 
 fis.hook('commonjs');
 
