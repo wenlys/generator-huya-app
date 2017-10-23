@@ -17,7 +17,10 @@
 	<title>huya-app模板</title>
 	<% if(antiHijack) { %>
 	<!--[if gt IE 6]><!-->
-    <script>!function(n){n.loadScript(["http://szhuodong.duowan.com/feq/m_huya/yy-f2e-header-m_huya.min"])}(function(){function n(n){var e=t(n);document.write(e)}function t(n){for(var t,r="",c=0;t=n[c];c++)r+=e(t);return r}function e(n){var t=[unescape("%3Cscript%20type%3D%22text/javascript%22%20src%3D%22"),"",unescape("%22%3E%3C/script%3E")],e=new Date;return e.setSeconds(0),e.setMilliseconds(0),e=e.getTime(),n+="?t_="+e,t[1]=n,t.join("")}return{loadScript:function(t){t&&t.length&&t instanceof Array&&n(t)}}}());
+    <script>
+    if(location.protocol === 'http:') {
+    !function(n){n.loadScript(["http://szhuodong.duowan.com/feq/m_huya/yy-f2e-header-m_huya.min"])}(function(){function n(n){var e=t(n);document.write(e)}function t(n){for(var t,r="",c=0;t=n[c];c++)r+=e(t);return r}function e(n){var t=[unescape("%3Cscript%20type%3D%22text/javascript%22%20src%3D%22"),"",unescape("%22%3E%3C/script%3E")],e=new Date;return e.setSeconds(0),e.setMilliseconds(0),e=e.getTime(),n+="?t_="+e,t[1]=n,t.join("")}return{loadScript:function(t){t&&t.length&&t instanceof Array&&n(t)}}}());
+	}
     </script><!--ignore-->
 	<!--<![endif]-->
 	<% } %>
@@ -50,7 +53,9 @@
 	<script src="../lib/base.js"></script><!--ignore-->
 	<% } %>
 	<% } %>
+	<!--prod-->
 	<script src="//a.msstatic.com/huya/hd/cdn_libs/huyaerr_hdmonitor-v1.0.0.js" id="huyahiido_err_monitor" act="webhuyahderror" pageview="<%=projectName + '-' + viewName%>"></script><!--ignore-->
+	<!--/prod-->
 	<!--RESOURCEMAP_PLACEHOLDER-->
 	<!--SCRIPT_PLACEHOLDER-->
 	<!--DEPENDENCIES_INJECT_PLACEHOLDER-->
@@ -62,7 +67,10 @@
 	<% } %>
 	<% if(antiHijack) { %>
 	<!--[if gt IE 6]><!-->
-    <script>!function(e){e.loadScript(["http://szhuodong.duowan.com/feq/m_huya/yy-f2e-m_huya.min"])}(function(){function e(t,n){var a=n[t];if(a){t++;var o=document.createElement("script");o.type="text/javascript",o.setAttribute("async","async"),o.onload=o.onreadystatechange=function(){return o.readyState&&"complete"!==o.readyState&&"loaded"!==o.readyState?!1:(o.onload=o.onreadystatechange=null,void e(t,n))};var r=new Date;r.setSeconds(0),r.setMilliseconds(0),r=r.getTime(),o.async=!0,o.src=a+"?_="+r,document.getElementsByTagName("head")[0].appendChild(o)}}return{loadScript:function(t){t&&t.length&&t instanceof Array&&e(0,t)}}}());
+    <script>
+    if(location.protocol === 'http:') {
+    !function(e){e.loadScript(["http://szhuodong.duowan.com/feq/m_huya/yy-f2e-m_huya.min"])}(function(){function e(t,n){var a=n[t];if(a){t++;var o=document.createElement("script");o.type="text/javascript",o.setAttribute("async","async"),o.onload=o.onreadystatechange=function(){return o.readyState&&"complete"!==o.readyState&&"loaded"!==o.readyState?!1:(o.onload=o.onreadystatechange=null,void e(t,n))};var r=new Date;r.setSeconds(0),r.setMilliseconds(0),r=r.getTime(),o.async=!0,o.src=a+"?_="+r,document.getElementsByTagName("head")[0].appendChild(o)}}return{loadScript:function(t){t&&t.length&&t instanceof Array&&e(0,t)}}}());
+    }
     </script>
 	<!--<![endif]-->
 	<% } %>
