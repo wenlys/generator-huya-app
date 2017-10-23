@@ -195,6 +195,9 @@ fis.media('map')
             })
         ]
     })
+    .match('/lib/base/**', {
+        release: true
+    })
     //压缩js
     .match('**.js', {
         optimizer: fis.plugin('uglify-js', {
