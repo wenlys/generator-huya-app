@@ -69,16 +69,18 @@ fis.match('/modules/**', {
     isMod: true,
 });
 
-fis.match('{/widget/**/**.html, /widget/**/**.scss}', {
+fis.match('/widget/**/**.html', {
     release : false
 },true);
 
 
-// 假如想某些widget的scss资源发布的话，请开启这里
-/*fis.match('{/widget/header/header.scss,/widget/sidebar/sidebar.scss}', {
-    release : true
+fis.match('/widget/async/**/**.scss', {
+    release : false,
+    useSprite: false,
 },true);
-*/
+
+
+
 
 fis.hook('commonjs');
 
