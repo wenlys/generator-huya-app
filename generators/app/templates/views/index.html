@@ -33,6 +33,12 @@
 	<% if(huyaHeaderFooter) {%>
 	<style type="text/css"> body {padding-top: 50px } </style><!--ignore--> 
 	<% } %>
+	<script type="text/javascript">
+        window.performanceInfo = {};
+        window.performanceInfo.whiteScreenTime = +new Date();
+        window.performanceInfo.firstScreenTime = 0;
+        window.performanceInfo.pageview = "<%=projectName + '-' + viewName%>";
+   </script><!--ignore--> 
 </head>
 <body>
 	
@@ -57,6 +63,9 @@
 	<script>
 		require('modules/<%=viewName%>')
 	</script>
+	<!--prod-->
+	<script src="//a.msstatic.com/huya/hd/cdn_libs/performance_report-min.js"></script><!--ignore-->
+	<!--/prod-->
 	<% if(huyaHeaderFooter) { %>
 	<script src="//a.msstatic.com/huya/common/footer.js"></script><!--ignore-->
 	<% } %>

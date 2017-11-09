@@ -91,7 +91,7 @@ module.exports = generators.Base.extend({
 			// 复制项目模板
             copydir.sync(this.templatePath(), this.destinationPath(), function(stat, filepath, filename){
                 // 文件不复制
-                if(filename === 'base.js' || filename === 'index.html' || filename === 'package.json' || filename === 'pages_module.scss' || filename === 'flexible.js'){
+                if(filename === 'base.js' || filename === 'index.html' || filename === 'package.json' || filename === 'pages_module.scss'){
                     return false;
                 }
                 return true;
