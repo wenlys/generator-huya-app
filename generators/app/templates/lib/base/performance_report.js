@@ -1,6 +1,6 @@
 ;(function() {
 
-	if (!window.performanceInfo) {
+	if (!window.performanceInfo || !window.performance) {
 		return false
 	}
 
