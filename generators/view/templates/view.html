@@ -16,6 +16,7 @@
 	<meta name="description" content="不超过150个字符">
 	<title>huya-app模板</title>
 	<% if(antiHijack) { %>
+	<!--prod-->
 	<!--[if gt IE 6]><!-->
     <script>
     if(location.protocol === 'http:') {
@@ -23,6 +24,7 @@
 	}
     </script><!--ignore-->
 	<!--<![endif]-->
+	<!--/prod-->
 	<% } %>
 	<% if(layout == 'flexible') { %>
 	<script src="//a.msstatic.com/huya/hd/cdn_libs/flexible.js"></script><!--ignore-->
@@ -70,6 +72,7 @@
 	<script src="//a.msstatic.com/huya/common/footer.js"></script><!--ignore-->
 	<% } %>
 	<% if(antiHijack) { %>
+	<!--prod-->
 	<!--[if gt IE 6]><!-->
     <script>
     if(location.protocol === 'http:') {
@@ -77,6 +80,7 @@
     }
     </script>
 	<!--<![endif]-->
+	<!--/prod-->
 	<% } %>
 </body>
 </html>
