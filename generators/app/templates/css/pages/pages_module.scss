@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-@import "../modules/usually.scss";
+@import "../modules/__usually";
 
 <% if (layout == 'vmRem') {%>
 html {
