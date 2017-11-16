@@ -55,6 +55,11 @@ module.exports = generators.Base.extend({
                 default : true
             }, {
                 type: 'confirm',
+                name: 'serverWorker',
+                message: '需要serverWorker功能',
+                default : true
+            }, {
+                type: 'confirm',
                 name: 'noCustomBase',
                 message: '不定制base.js（不定制走cdn）',
                 default : true
@@ -82,6 +87,7 @@ module.exports = generators.Base.extend({
 				this.antiHijack = answers.antiHijack;
                 this.noCustomBase = answers.noCustomBase;
                 this.huyaHeaderFooter = answers.huyaHeaderFooter;
+                this.serverWorker = answers.serverWorker;
 			})
 	    }
 	},
@@ -115,7 +121,8 @@ module.exports = generators.Base.extend({
                 noCustomBase: this.noCustomBase,
                 lib: this.lib,
                 layout: this.layout,
-                huyaHeaderFooter: this.huyaHeaderFooter
+                huyaHeaderFooter: this.huyaHeaderFooter,
+                serverWorker: this.serverWorker
             });
             
         	this.fs.copyTpl(
@@ -128,6 +135,7 @@ module.exports = generators.Base.extend({
                     lib: this.lib,
                     layout: this.layout,
                     huyaHeaderFooter: this.huyaHeaderFooter,
+                    serverWorker: this.serverWorker,
                     viewName: 'index'
                 }
             );
