@@ -159,6 +159,7 @@ fis.match('{**.js, **.css, **.scss}',extrasObj);
 fis.match('sw.jstmpl', {
     rExt: '.js',
     useHash: false,
+    ignoreDependencies: true,
     extras: {
         register: 'sw',
         swConf: {
