@@ -89,7 +89,7 @@ function releaseOperate() {
 
 			child_process.exec(releaseCommand, function (error, stdout, stderr) {
 				if (error) {
-					reject('svn update 失败:');
+					reject('fis 发布失败!');
 				} else {
 					console.log('fis 开始发布');
 					console.log(stdout);
