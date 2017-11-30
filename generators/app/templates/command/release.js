@@ -1,4 +1,5 @@
 const child_process = require('child_process');
+const readline = require('readline');
 const fs = require('fs');
 const TARGET = process.env.npm_lifecycle_event;
 const oPackage = require('../package.json');
@@ -39,6 +40,8 @@ function checkReleaseCatalog() {
 
 // 发布目录的操作
 function releaseOperate() {
+	
+	var rl = readline.createInterface(process.stdin, process.stdout);
 	
 	// 创建发布项目
 	var createProject = function() {
@@ -118,17 +121,40 @@ function releaseOperate() {
 
 		return new Promise(function(resolve, reject) {
 
-			process.chdir(path + '/' + projectName);
+		process.chdir(path + '/' + projectName);
 
-			child_process.exec(`svn commit -m "${projectName}--自动发布"`, function (error, stdout, stderr) {
-				if (error) {
-					reject('svn commit 失败:');
-					checkReleaseCatalog();
-				} else {
-					console.log('svn commit 成功');
-					resolve();
-				} 
+			console.log('请输入svn的提交信息(输入end结束输入)：');
+
+			var userInput = [];
+			rl.on('line', function(line){
+			    switch(line) {
+			        case 'end':
+			            rl.close();
+			            break;
+			        default:
+		                userInput.push(line);
+		                break;
+			    }
 			});
+
+			rl.on("close", function(){
+				svnCommit();
+			});
+
+
+			function svnCommit() {
+				var message = userInput.join('###') || `${projectName}--自动发布`;
+
+				child_process.exec(`svn commit -m ${message}`, function (error, stdout, stderr) {
+					if (error) {
+						reject('svn commit 失败:');
+						checkReleaseCatalog();
+					} else {
+						console.log('svn commit 成功');
+						resolve();
+					} 
+				});
+			}
 
 		});
 	}; 
