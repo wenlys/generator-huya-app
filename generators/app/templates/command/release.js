@@ -121,26 +121,9 @@ function releaseOperate() {
 
 		return new Promise(function(resolve, reject) {
 
-		process.chdir(path + '/' + projectName);
-
-			console.log('请输入svn的提交信息(输入end结束输入)：');
+			process.chdir(path + '/' + projectName);
 
 			var userInput = [];
-			rl.on('line', function(line){
-			    switch(line) {
-			        case 'end':
-			            rl.close();
-			            break;
-			        default:
-		                userInput.push(line);
-		                break;
-			    }
-			});
-
-			rl.on("close", function(){
-				svnCommit();
-			});
-
 
 			function svnCommit() {
 				var message = userInput.join('###') || `${projectName}--自动发布`;
@@ -155,6 +138,36 @@ function releaseOperate() {
 					} 
 				});
 			}
+
+
+			if (TARGET === 'test') {
+
+				svnCommit();
+				
+			} else if (TARGET === 'prod') {
+
+				console.log('请输入svn的提交信息(输入end结束输入)：');
+
+				rl.on('line', function(line){
+				    switch(line) {
+				        case 'end':
+				            rl.close();
+				            break;
+				        default:
+			                userInput.push(line);
+			                break;
+				    }
+				});
+
+				rl.on("close", function(){
+					svnCommit();
+				});
+			}
+
+			
+
+
+			
 
 		});
 	}; 
@@ -181,6 +194,7 @@ function releaseOperate() {
 
 	executeSequentially(aPromises).then(function() {
 		console.log('操作完毕 well done!');
+		process.exit(0);
 	}).catch(function(error) {
 		console.log(error);
 	});
