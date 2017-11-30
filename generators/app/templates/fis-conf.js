@@ -147,30 +147,32 @@ fis.match('::package', {
 })
 
 //-------------- sw配置 ----------------------
-var extrasObj = {
-    extras: {
-        preCache: true
-    }
-}
-// 设置html.img,js,css缓存
-fis.match('::image', extrasObj);
-fis.match(' /views/**.html', extrasObj);
-fis.match('{**.js, **.css, **.scss}',extrasObj);
-// 设置sw文件的配置
-fis.match('sw.jstmpl', {
-    rExt: '.js',
-    useHash: false,
-    ignoreDependencies: true,
-    extras: {
-        register: 'sw',
-        swConf: {
-            version: fis.get('new date'),   // 控制每次发版的时候都不一样，主要是为了更新sw.js文件
-            project: oPackage.category + '-' + oPackage.projectName,  // 项目昵称，主要是确保唯一性
-            accessPath: '/' + oPackage.category + '/' + oPackage.projectName  // 访问路径，主要是用来缓存html的
+if (yoRc.serverWorker) {
+    var extrasObj = {
+        extras: {
+            preCache: true
         }
-    },
-    optimizer: fis.plugin('uglify-js')
-},true);
+    }
+    // 设置html.img,js,css缓存
+    fis.match('::image', extrasObj);
+    fis.match(' /views/**.html', extrasObj);
+    fis.match('{**.js, **.css, **.scss}',extrasObj);
+    // 设置sw文件的配置
+    fis.match('sw.jstmpl', {
+        rExt: '.js',
+        useHash: false,
+        ignoreDependencies: true,
+        extras: {
+            register: 'sw',
+            swConf: {
+                version: fis.get('new date'),   // 控制每次发版的时候都不一样，主要是为了更新sw.js文件
+                project: oPackage.category + '-' + oPackage.projectName,  // 项目昵称，主要是确保唯一性
+                accessPath: '/' + oPackage.category + '/' + oPackage.projectName  // 访问路径，主要是用来缓存html的
+            }
+        },
+        optimizer: fis.plugin('uglify-js')
+    },true);
+}
 // 生成sw文件配置方法
 function createSW(ret, conf, settings, opt) {
     if (!yoRc.serverWorker) {
