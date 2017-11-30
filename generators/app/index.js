@@ -101,8 +101,8 @@ module.exports = generators.Base.extend({
                     return false;
                 }
 
-                if (filename === 'sw.jstmpl' && this.serverWorker) {
-                    return true;
+                if (filename === 'sw.jstmpl' && !this.serverWorker) {
+                    return false;
                 }
 
                 return true;
