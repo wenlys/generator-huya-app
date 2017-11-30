@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 var oPackage = require('./package.json');
+var yoRc = require('./.yo-rc.json');
 
 fis.set('new date', Date.now())
 
@@ -172,7 +173,9 @@ fis.match('sw.jstmpl', {
 },true);
 // 生成sw文件配置方法
 function createSW(ret, conf, settings, opt) {
-
+    if (!yoRc.serverWorker) {
+        return false;
+    }
     // ret.src 所有的源码，结构是 {'<subpath>': <File 对象>}
     // ret.ids 所有源码列表，结构是 {'<id>': <File 对象>}
     // ret.map 如果是 spriter、postpackager 这时候已经能得到打包结果了，

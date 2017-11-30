@@ -26,6 +26,16 @@ if (TARGET === 'test') {
 }
 
 
+// 切换到发布目录
+function checkReleaseCatalog() {
+	child_process.exec(`start ${path}/${projectName}`, function (error, stdout, stderr) {
+		if (error) {
+			console.log(error);
+		}
+		
+	});
+}
+
 
 // 发布目录的操作
 function releaseOperate() {
@@ -51,6 +61,7 @@ function releaseOperate() {
 			child_process.exec('svn add . --no-ignore --force', function (error, stdout, stderr) {
 				if (error) {
 					reject('svn add 失败:');
+					checkReleaseCatalog();
 				} else {
 					console.log('svn add 成功');
 					resolve();
@@ -70,6 +81,7 @@ function releaseOperate() {
 			child_process.exec('svn update', function (error, stdout, stderr) {
 				if (error) {
 					reject('svn update 失败:');
+					checkReleaseCatalog();
 				} else {
 					console.log('svn update 成功');
 					resolve();
@@ -111,6 +123,7 @@ function releaseOperate() {
 			child_process.exec(`svn commit -m "${projectName}--自动发布"`, function (error, stdout, stderr) {
 				if (error) {
 					reject('svn commit 失败:');
+					checkReleaseCatalog();
 				} else {
 					console.log('svn commit 成功');
 					resolve();

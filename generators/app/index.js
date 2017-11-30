@@ -100,6 +100,11 @@ module.exports = generators.Base.extend({
                 if(filename === 'base.js' || filename === 'index.html' || filename === 'package.json' || filename === 'pages_module.scss'){
                     return false;
                 }
+
+                if (filename === 'sw.jstmpl' && this.serverWorker) {
+                    return true;
+                }
+
                 return true;
             });
 		},
