@@ -185,30 +185,33 @@ function createSW(ret, conf, settings, opt) {
 
     var precacheConfig = [];
 
-    // 找出要换成的html
     fis.util.map(ret.src, function(subpath, oFile) {
-        if (oFile.isHtmlLike && (oFile.extras && oFile.extras.preCache)) {
-            precacheConfig.push(oFile.release);
-        }
-    })
 
-    // 对打包后的资源列表进行缓存
-    fis.util.map(ret.map.res, function(key, oFile) {
-        if (key.indexOf('sw') == -1 && (oFile.extras && oFile.extras.preCache) && !oFile.aioPkg && !oFile.cssspritePkg) {
-            precacheConfig.push(oFile.uri);
+        if (oFile.isInline != true && oFile.extras && oFile.extras.preCache && oFile.release) {
+            if (oFile.isHtmlLike) {
+                // 找出要缓存的访问页面
+                precacheConfig.push(oFile.release);
+            } else if (!oFile.map || (oFile.map && !oFile.map.cssspritePkg && !oFile.map.aioPkg)) {
+                precacheConfig.push(oFile.getUrl())
+            }
+
         }
+
     })
 
     // 对打包后的资源列表进行缓存
     fis.util.map(ret.map.pkg, function(key, oFile) {
-        precacheConfig.push(oFile.uri);
+        if (precacheConfig.indexOf(oFile.uri) == -1) {
+           precacheConfig.push(oFile.uri); 
+        }
+        
     })
     
     // 找出sw的文件，以后可以写成插件的形式就不用这样搞了
-    fis.util.map(ret.ids, function(subpath, file) {
-        if (file.extras.register == 'sw') {
-            var swConf = file.extras.swConf;
-            var swContent = file.getContent();
+    fis.util.map(ret.ids, function(subpath, oFile) {
+        if (oFile.extras.register == 'sw') {
+            var swConf = oFile.extras.swConf;
+            var swContent = oFile.getContent();
 
             swConf.precacheConfig = precacheConfig.join('|=|');
 
@@ -219,7 +222,7 @@ function createSW(ret, conf, settings, opt) {
                 }  
             })
 
-            file.setContent(swContent);
+            oFile.setContent(swContent);
         }
     })
  
