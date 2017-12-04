@@ -94,6 +94,7 @@ module.exports = generators.Base.extend({
 	writing : {
 
 		templates() {
+            var _this = this;
 			// 复制项目模板
             copydir.sync(this.templatePath(), this.destinationPath(), function(stat, filepath, filename){
                 // 文件不复制
@@ -101,7 +102,7 @@ module.exports = generators.Base.extend({
                     return false;
                 }
 
-                if (filename === 'sw.jstmpl' && !this.serverWorker) {
+                if (filename === 'sw.jstmpl' && !_this.serverWorker) {
                     return false;
                 }
 
