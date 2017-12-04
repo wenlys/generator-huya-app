@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 var oPackage = require('./package.json');
-var yoRc = require('./.yo-rc.json');
+var yoRc = require('./.yo-rc.json')['generator-huya-app']['viewConfig'];
 
 fis.set('new date', Date.now())
 
