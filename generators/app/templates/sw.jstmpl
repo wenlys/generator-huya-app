@@ -408,7 +408,9 @@ function fetchAndCache(request, options) {
 
     url.search += (url.search ? '&swTime=' : '?swTime=') + Date.now();
 
-    return fetch(url.toString()).then(function(response) {
+    return fetch(url.toString(),{
+            mode: "no-cors"
+        }).then(function(response) {
         // Only cache GET requests with successful responses.
         // Since this is not part of the promise chain, it will be done
         // asynchronously and will not block the response from being returned to the
