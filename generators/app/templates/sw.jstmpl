@@ -1990,7 +1990,8 @@ function pathToRegexp (path, keys, options) {
 
 // Runtime cache 配置转换后的 toolbox 代码.
 // self.toolbox.options.debug = true;
-
+// 对于响应头设置了Access-Control-Allow-Origin:*，设置cors，
+// 非的话，设置no-cors，但缓存时间最好不要超过一分钟，怕404，可以用networkFirst。设置networkTimeoutSeconds为3s，3s不回来用缓存
 self.toolbox.router.get("/huya/hd/cdn_libs/(.*)", self.toolbox.cacheFirst, {
     origin: /a\.msstatic\.com/,
     mode: 'cors', 
