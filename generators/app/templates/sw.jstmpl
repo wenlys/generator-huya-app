@@ -418,7 +418,7 @@ function fetchAndCache(request, options) {
         // Since this is not part of the promise chain, it will be done
         // asynchronously and will not block the response from being returned to the
         // page.
-        if (options.mode === 'no-cors') {
+        if (mode === 'no-cors') {
             if (request.method === 'GET' && successResponses.test(response.status)) {
                 openCache(options).then(function(cache) {
                     cache.put(request, response).then(function() {
@@ -436,7 +436,7 @@ function fetchAndCache(request, options) {
                     });
                 });
             }
-        } else if (options.mode === 'cors') {
+        } else if (mode === 'cors') {
             if (request.method === 'GET' && response.ok) {
                 openCache(options).then(function(cache) {
                     cache.put(request, response).then(function() {
