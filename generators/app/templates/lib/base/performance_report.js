@@ -5,7 +5,7 @@
 	}
 
 	var act = 'hdperformance';
-	var server = '//ylog.hiido.com/c.gif?act='+ act +'&pageview=' + window.performanceInfo.pageview + '&protocol=' + location.protocol +'&';
+	var server = '//ylog.hiido.com/c.gif?act='+ act +'&pageview=' + window.performanceInfo.pageview + '&protocol=' + encodeURIComponent(location.protocol) +'&';
 	function param(obj){
 		var p = [];
 		for(var k in obj){
