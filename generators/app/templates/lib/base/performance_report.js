@@ -5,7 +5,7 @@
 	}
 
 	var act = 'webhdperformance';
-	var server = '//ylog.hiido.com/c.gif?act='+ act +'&pageview=' + window.performanceInfo.pageview + '&protocol=' + encodeURIComponent(location.protocol) +'&';
+	var server = '//ylog.hiido.com/c.gif?act='+ act +'&pageview=' + window.performanceInfo.pageview + '&protocol=' + location.protocol.replace(':','') +'&';
 	function param(obj){
 		var p = [];
 		for(var k in obj){
