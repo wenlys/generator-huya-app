@@ -289,6 +289,13 @@ self.addEventListener('activate', function(event) {
 });
 
 
+function IgnoredHashParam(originalUrl) {
+    var url = new URL(originalUrl);
+        url.hash = '';
+        url.search = '';
+    return url.toString();
+}
+
 self.addEventListener('fetch', function(event) {
     if (event.request.method === 'GET') {
 
@@ -299,7 +306,9 @@ self.addEventListener('fetch', function(event) {
 
         // 首先去除已配置的忽略参数及hash
         // 查看缓存简直中是否包含该请求，包含就将shouldRespond 设为true
-        var url = stripIgnoredUrlParameters(event.request.url, ignoreUrlParametersMatching);
+        // var url = stripIgnoredUrlParameters(event.request.url, ignoreUrlParametersMatching);
+        var url = IgnoredHashParam(event.request.url);
+
         shouldRespond = urlsToCacheKeys.has(url);
 
         // 如果 shouldRespond 是 false, 我们在url后默认增加 'index.html'
@@ -307,6 +316,14 @@ self.addEventListener('fetch', function(event) {
         var directoryIndex = 'index.html';
         if (!shouldRespond && directoryIndex) {
             url = addDirectoryIndex(url, directoryIndex);
+            shouldRespond = urlsToCacheKeys.has(url);
+        }
+
+        // 去掉访问url的参数
+        if (!shouldRespond && url.indexOf('.html') > -1) {
+            var oUrl = new URL(url);
+            oUrl.search = '';
+            url = oUrl.toString();
             shouldRespond = urlsToCacheKeys.has(url);
         }
 
