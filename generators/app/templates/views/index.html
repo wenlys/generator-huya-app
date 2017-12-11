@@ -68,11 +68,11 @@
 	<!--prod-->
 	<script src="//a.msstatic.com/huya/hd/cdn_libs/performance_report-min.js"></script><!--ignore-->
 	<!--/prod-->
-	<% if(serverWorker) { %>
-	<script src="../lib/base/sw_register.js?__inline"></script><!--ignore-->
-	<% } %>
 	<% if(huyaHeaderFooter) { %>
 	<script src="//a.msstatic.com/huya/common/footer.js"></script><!--ignore-->
+	<% } %>
+	<% if(serverWorker) { %>
+	<script src="../lib/base/sw_register.js?__inline"></script><!--ignore-->
 	<% } %>
 	<% if(antiHijack) { %>
 	<!--prod-->

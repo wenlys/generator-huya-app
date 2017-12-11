@@ -113,7 +113,7 @@ var accessPath = '{{accessPath}}';
 var cacheVersion = '{{version}}';
 
 // 缓存昵称
-var cacheName = 'sw-precache-{{project}}' + (self.registration ? self.registration.scope : '');
+var cacheName = 'sw-precache-{{project}}' + '='+ (self.registration ? self.registration.scope : '');
 
 var firstRegister = 1; // 默认1是首次安装SW， 0是SW更新
 
@@ -409,7 +409,13 @@ function fetchAndCache(request, options) {
     // 创建一个新的URL对象，避免影响原始URL
     var url = new URL(request.clone().url);
 
-    url.search += (url.search ? '&swTime=' : '?swTime=') + Date.now();
+    // 一分钟更新一次
+    var date = new Date;
+        date.setSeconds(0);
+        date.setMilliseconds(0);
+        date = date.getTime();
+
+    url.search += (url.search ? '&swTime=' : '?swTime=') + date;
 
     return fetch(url.toString(), {
         mode: mode
@@ -1410,22 +1416,38 @@ function networkFirst(request, values, options) {
     var originalResponse;
 
     if (networkTimeoutSeconds) {
-      var cacheWhenTimedOutPromise = new Promise(function(resolve) {
-        timeoutId = setTimeout(function() {
-          cache.match(request, cacheQueryOptions).then(function(response) {
-            // Only resolve this promise if there's a valid response in the
-            // cache. This ensures that we won't time out a network request
-            // unless there's a cached entry to fallback on, which is arguably
-            // the preferable behavior.
-            var now = Date.now();
-            var maxAgeSeconds = cacheOptions.maxAgeSeconds;
-            if (helpers.isResponseFresh(response, maxAgeSeconds, now)) {
-              resolve(response);
-            }
-          });
-        }, networkTimeoutSeconds * 1000);
-      });
-      promises.push(cacheWhenTimedOutPromise);
+        var cacheWhenTimedOutPromise = new Promise(function(resolve) {
+            timeoutId = setTimeout(function() {
+                cache.match(request, cacheQueryOptions).then(function(response) {
+                    // Only resolve this promise if there's a valid response in the
+                    // cache. This ensures that we won't time out a network request
+                    // unless there's a cached entry to fallback on, which is arguably
+                    // the preferable behavior.
+                    var now = Date.now();
+                    // 这是我注释的
+                    // var maxAgeSeconds = cacheOptions.maxAgeSeconds;
+                    // if (helpers.isResponseFresh(response, maxAgeSeconds, now)) {
+                    //  resolve(response);
+                    // }
+                    
+                    // 这是我加的
+                    if (response) {
+                        helpers.isRequestFresh(request, cacheOptions, now).then(function(btn){
+                            if (!btn) {
+                                // 没有超出cacheOptions.maxAgeSeconds的设置
+                                helpers.debug('从缓存中读取 [' + request.url + ']');
+                                resolve(response);
+                            }
+                        }).catch(function(error) {
+                            helpers.debug('isRequestFresh error = ' + error);
+                        })
+                    }
+                    
+
+                });
+            }, networkTimeoutSeconds * 1000);
+        });
+        promises.push(cacheWhenTimedOutPromise);
     }
 
     var networkPromise = helpers.fetchAndCache(request, options)
@@ -1436,6 +1458,7 @@ function networkFirst(request, values, options) {
         }
 
         if (successResponses.test(response.status)) {
+            helpers.debug('从网络中读取，并更新缓存 [' + request.url + ']');
           return response;
         }
 
@@ -1997,6 +2020,63 @@ self.toolbox.router.get("/huya/hd/cdn_libs/(.*)", self.toolbox.cacheFirst, {
     mode: 'cors', 
     cache: {
         name: 'cdn_libs',
-        maxAgeSeconds: 2 * 60 * 60
+        queryOptions: {
+            ignoreSearch: true
+        },
+        maxAgeSeconds: 2 * 60 * 60 // 2小时
     }
 });
+// 跨域的第三方资源，采用networkFirst， networkTimeoutSeconds为2s
+// 网络和存储一起并发取，网络2S没有回来，就拿存储的5分钟之前的资源，网络2S后回来更新存储
+self.toolbox.router.get("/s/rp/(.*)", self.toolbox.networkFirst, {
+    origin: /szhuodong\.duowan\.com/,
+    mode: 'no-cors', 
+    cache: {
+        name: 'three_cdn',
+        queryOptions: {
+            ignoreSearch: true
+        },
+        maxAgeSeconds: 1 * 60 * 60 // 1 小时
+    },
+    networkTimeoutSeconds: 0.8
+});
+self.toolbox.router.get("/jssdk/dist/(.*)", self.toolbox.networkFirst, {
+    origin: /kiwistatic\.huya\.com/,
+    mode: 'no-cors', 
+    cache: {
+        name: 'three_cdn',
+        queryOptions: {
+            ignoreSearch: true
+        },
+        maxAgeSeconds: 1 * 60 * 60 // 1 小时
+    },
+    networkTimeoutSeconds: 0.8
+});
+
+
+// 业务方可以写的地方
+// 第三方的接口缓存
+
+// self.toolbox.router.get("/guildwarnov/(.*)", function(request, values, options) {
+
+//     // jquery的ajax接口，callback需要一个唯一固定的参数， 去掉_的缓存
+//     var url = stripIgnoredUrlParameters(request.url, [/^_/]);
+//     var oRequest = new Request(url, request);
+
+//     if (oRequest.url.indexOf('jQuery') > -1) {
+//         // 存在随机数jq的callback全都走网络
+//         return self.toolbox.networkOnly(oRequest, values, options);
+//     } else {
+//         // 走缓存
+//         return self.toolbox.networkFirst(oRequest, values, options);
+//     }
+
+// }, {
+//     origin: /activity\.huya\.com/,
+//     mode: 'no-cors', 
+//     cache: {
+//         name: 'three_api',
+//         maxAgeSeconds: 5 * 60  // 5 分钟
+//     },
+//     networkTimeoutSeconds: 0.8
+// });
