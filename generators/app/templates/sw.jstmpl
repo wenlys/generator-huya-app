@@ -292,7 +292,7 @@ self.addEventListener('activate', function(event) {
 function IgnoredHashParam(originalUrl) {
     var url = new URL(originalUrl);
         url.hash = '';
-        url.search = '';
+        //url.search = '';
     return url.toString();
 }
 
