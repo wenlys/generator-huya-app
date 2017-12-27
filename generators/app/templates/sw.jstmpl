@@ -727,7 +727,9 @@ self.addEventListener('install', function(event) {
                                 }
 
                                 return cleanResponse(response).then(function(responseToCache) {
-                                    return cache.put(cacheKey, responseToCache);
+                                    return cache.put(cacheKey, responseToCache).catch(function(){
+                                        throw Error('catch_put fail');
+                                    });
                                 });
                             });
                         }
@@ -755,7 +757,9 @@ self.addEventListener('activate', function(event) {
                     existingRequests.map(function(existingRequest) {
                         // 删除原缓存中相同键值内容
                         if (!setOfExpectedUrls.has(existingRequest.url)) {
-                            return cache.delete(existingRequest);
+                            return cache.delete(existingRequest).catch(function(){
+                                throw Error('cache_delete fail');
+                            });
                         }
                     })
                 );
@@ -949,6 +953,8 @@ function fetchAndCache(request, options) {
                                 cacheOptions.name) {
                             queueCacheExpiration(request, cache, cacheOptions);
                         }
+                    }).catch(function(){
+                        throw Error('cache_put_tool fail');
                     });
                 });
             }
@@ -967,6 +973,8 @@ function fetchAndCache(request, options) {
                                 cacheOptions.name) {
                             queueCacheExpiration(request, cache, cacheOptions);
                         }
+                    }).catch(function(){
+                        throw Error('cache_put_tool fail');
                     });
                 });
             }
@@ -1063,7 +1071,9 @@ function cleanupCache(request, cache, cacheOptions) {
         debug('Successfully updated IDB.');
 
         var deletionPromises = urlsToDelete.map(function(urlToDelete) {
-            return cache.delete(urlToDelete);
+            return cache.delete(urlToDelete).catch(function(){
+                throw Error('cache_delete_tool fail');
+            });
         });
 
         return Promise.all(deletionPromises).then(function() {
