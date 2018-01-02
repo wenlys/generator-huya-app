@@ -77,9 +77,9 @@ if('serviceWorker' in navigator && location.protocol === 'https:') {
 			function unregisterSw() {
 				navigator.serviceWorker.getRegistrations().then(function(regs) {
 					for(var registration in regs) {
-						registration.unregister().then(function(boolean) {
+						regs[registration].unregister().then(function(boolean) {
 						    if(boolean){
-						    	console.log('ServiceWorker 取消注册! ' + registration.scope)
+						    	console.log('ServiceWorker 取消注册! ' + regs[registration].scope)
 						    }
 						});
 					} 
