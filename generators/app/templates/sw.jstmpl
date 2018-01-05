@@ -2543,7 +2543,7 @@ self.toolbox.router.get("/huya/hd/cdn_libs/(.*)", self.toolbox.cacheFirst, {
         queryOptions: {
             ignoreSearch: true
         },
-        maxAgeSeconds: 2 * 60 * 60 // 2小时
+        maxAgeSeconds: 8 * 60 * 60 // 8小时
     }
 });
 // 跨域的第三方资源，采用networkFirst， networkTimeoutSeconds为2s
@@ -2556,9 +2556,9 @@ self.toolbox.router.get("/s/rp/(.*)", self.toolbox.networkFirst, {
         queryOptions: {
             ignoreSearch: true
         },
-        maxAgeSeconds: 1 * 60 * 60 // 1 小时
+        maxAgeSeconds: 8 * 60 * 60 // 8小时
     },
-    networkTimeoutSeconds: 0.8
+    networkTimeoutSeconds: 0.3
 });
 self.toolbox.router.get("/jssdk/dist/(.*)", self.toolbox.networkFirst, {
     origin: /kiwistatic\.huya\.com/,
@@ -2568,9 +2568,9 @@ self.toolbox.router.get("/jssdk/dist/(.*)", self.toolbox.networkFirst, {
         queryOptions: {
             ignoreSearch: true
         },
-        maxAgeSeconds: 1 * 60 * 60 // 1 小时
+        maxAgeSeconds: 8 * 60 * 60 // 8小时
     },
-    networkTimeoutSeconds: 0.8
+    networkTimeoutSeconds: 0.3
 });
 
 
@@ -2598,5 +2598,5 @@ self.toolbox.router.get("/jssdk/dist/(.*)", self.toolbox.networkFirst, {
 //         name: 'three_api',
 //         maxAgeSeconds: 5 * 60  // 5 分钟
 //     },
-//     networkTimeoutSeconds: 0.8
+//     networkTimeoutSeconds: 0.3
 // });
