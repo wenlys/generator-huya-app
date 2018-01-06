@@ -154,7 +154,7 @@ function releaseOperate() {
 				            rl.close();
 				            break;
 						default:
-							userInput += (line.replace(/\s/g, '') + '###');
+							userInput += (line.replace(/\s/g,'') + '###');
 			                break;
 				    }
 				});
