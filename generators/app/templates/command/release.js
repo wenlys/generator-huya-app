@@ -123,10 +123,10 @@ function releaseOperate() {
 
 			process.chdir(path + '/' + projectName);
 
-			var userInput = [];
+			var userInput = '';
 
 			function svnCommit() {
-				var message = userInput.join('###') || `${projectName}--自动发布`;
+				var message = userInput || `${projectName}--自动发布`;
 
 				child_process.exec(`svn commit -m ${message}`, function (error, stdout, stderr) {
 					if (error) {
@@ -153,8 +153,8 @@ function releaseOperate() {
 				        case 'end':
 				            rl.close();
 				            break;
-				        default:
-			                userInput.push(line);
+						default:
+							userInput += (line + '###');
 			                break;
 				    }
 				});

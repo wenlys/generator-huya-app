@@ -4,8 +4,13 @@
 		return false
 	}
 
+	var protocol = 'sw-no';
+	if('serviceWorker' in navigator && window.location.protocol === 'https:') {
+		protocol = 'sw-yes';
+	}
+
 	var act = 'webhdperformance';
-	var server = '//ylog.hiido.com/c.gif?act='+ act +'&pageview=' + window.performanceInfo.pageview + '&protocol=' + location.protocol.replace(':','') +'&';
+	var server = '//ylog.hiido.com/c.gif?act='+ act +'&pageview=' + window.performanceInfo.pageview + '&protocol=' + protocol +'&';
 	function param(obj){
 		var p = [];
 		for(var k in obj){
