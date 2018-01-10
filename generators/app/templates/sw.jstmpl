@@ -65,7 +65,7 @@ var sai = {}
         }
 
         data = {
-            profile:1,
+            profile:data.profile,
             browser: detector.browser.name + '|' + detector.browser.version,  //浏览器
             device: detector.device.name,  //硬件设备
             os: detector.os.name,   //操作系统
@@ -94,6 +94,7 @@ var sai = {}
         // event.error.stack
         //console.log('error错误信息:');
         sendMessage({
+            profile: 1,
             lines: event.lineno + ":" + event.colno,
             file: event.filename,
             msg: event.message,
@@ -109,6 +110,7 @@ var sai = {}
         // event.reason
         //console.log('unhandledrejection错误信息:');
         sendMessage({
+            profile: 0,
             msg: "Unhandled promise rejection: " + event.reason
         })
     })

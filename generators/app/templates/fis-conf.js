@@ -154,7 +154,7 @@ if (yoRc.serverWorker) {
         }
     }
     // 设置html.img,js,css缓存
-    fis.match('::image', extrasObj);
+    // fis.match('::image', extrasObj); // 图片资源就不要放到这里了怕太大
     fis.match(' /views/**.html', extrasObj);
     fis.match('{**.js, **.css, **.scss}',extrasObj);
     // 设置sw文件的配置
