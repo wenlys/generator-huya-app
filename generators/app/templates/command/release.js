@@ -8,8 +8,8 @@ const projectName = oPackage.projectName;
 const testCommand = 'fis3 release -c';
 const prodCommand = 'fis3 release prod -c';
 
-let releaseCommand = ''; // 发布的命令
-let path = '';
+var releaseCommand = ''; // 发布的命令
+var path = '';
 
 // 当前开发项目的路径
 var currentPath = process.cwd();
